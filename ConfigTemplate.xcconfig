@@ -1,0 +1,11 @@
+//
+//  ConfigTemplate.xcconfig
+//  ByteCoin
+//
+//  Created by Eetu Hernesniemi on 7.1.2022.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+API_KEY = "" //api key value is required here.
