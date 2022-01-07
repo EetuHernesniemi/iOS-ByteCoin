@@ -27,10 +27,10 @@ public enum Environment {
     
     static let ApiKey: String = {
         guard let apiKey = Environment.infoDictionary[Keys.Plist.ApiKey] as? String else {
-            fatalError("API Key is not set in plist for this environment")
+            fatalError("API Key is not set in plist for this environment.")
         }
         if apiKey == "" {
-            fatalError("API Key has not been defined")
+            fatalError("API Key has no proper value in plist.")
         }
         return apiKey
     }()
