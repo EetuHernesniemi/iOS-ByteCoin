@@ -16,6 +16,7 @@
 		3C549D8A278857DB00AC9CA7 /* ByteCoinTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C549D89278857DB00AC9CA7 /* ByteCoinTests.swift */; };
 		3C549D94278857DB00AC9CA7 /* ByteCoinUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C549D93278857DB00AC9CA7 /* ByteCoinUITests.swift */; };
 		3C549D96278857DB00AC9CA7 /* ByteCoinUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C549D95278857DB00AC9CA7 /* ByteCoinUITestsLaunchTests.swift */; };
+		3C549DA4278864E200AC9CA7 /* CoinManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C549DA3278864E200AC9CA7 /* CoinManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		3C549D8F278857DB00AC9CA7 /* ByteCoinUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ByteCoinUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C549D93278857DB00AC9CA7 /* ByteCoinUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ByteCoinUITests.swift; sourceTree = "<group>"; };
 		3C549D95278857DB00AC9CA7 /* ByteCoinUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ByteCoinUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		3C549DA3278864E200AC9CA7 /* CoinManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,8 +103,9 @@
 			children = (
 				3C549D72278857D900AC9CA7 /* AppDelegate.swift */,
 				3C549D74278857D900AC9CA7 /* SceneDelegate.swift */,
-				3C549D76278857D900AC9CA7 /* ViewController.swift */,
-				3C549D78278857D900AC9CA7 /* Main.storyboard */,
+				3C549DA2278863F100AC9CA7 /* Model */,
+				3C549DA52788652000AC9CA7 /* Controller */,
+				3C549DA62788659900AC9CA7 /* View */,
 				3C549D7B278857DB00AC9CA7 /* Assets.xcassets */,
 				3C549D7D278857DB00AC9CA7 /* LaunchScreen.storyboard */,
 				3C549D80278857DB00AC9CA7 /* Info.plist */,
@@ -125,6 +128,30 @@
 				3C549D95278857DB00AC9CA7 /* ByteCoinUITestsLaunchTests.swift */,
 			);
 			path = ByteCoinUITests;
+			sourceTree = "<group>";
+		};
+		3C549DA2278863F100AC9CA7 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				3C549DA3278864E200AC9CA7 /* CoinManager.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		3C549DA52788652000AC9CA7 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				3C549D76278857D900AC9CA7 /* ViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		3C549DA62788659900AC9CA7 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				3C549D78278857D900AC9CA7 /* Main.storyboard */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -258,6 +285,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C549DA4278864E200AC9CA7 /* CoinManager.swift in Sources */,
 				3C549D77278857D900AC9CA7 /* ViewController.swift in Sources */,
 				3C549D73278857D900AC9CA7 /* AppDelegate.swift in Sources */,
 				3C549D75278857D900AC9CA7 /* SceneDelegate.swift in Sources */,
