@@ -11,4 +11,8 @@ struct CoinExchangeModel {
     let cryptoCurrency: String
     let exchangeCurrency: String
     let rate: Double
+    
+    var getRoundedExchangeRate: String {
+        return String(format: "%.2f", rate)
+    }
 }

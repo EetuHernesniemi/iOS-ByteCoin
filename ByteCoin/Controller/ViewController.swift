@@ -41,9 +41,9 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
 
 extension ViewController: CoinManagerDelegate {
     func didUpdateCoinExchange(coinManager: CoinManager, coinExchangeModel: CoinExchangeModel) {
-        print(coinExchangeModel)
         DispatchQueue.main.async {
-            print(coinExchangeModel)
+            self.currencyLabel.text = coinExchangeModel.exchangeCurrency
+            self.coinAmountLabel.text = coinExchangeModel.getRoundedExchangeRate
         }
         
     }

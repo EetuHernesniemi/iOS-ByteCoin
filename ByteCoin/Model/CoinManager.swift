@@ -21,6 +21,7 @@ struct CoinManager {
     
     var delegate: CoinManagerDelegate?
     
+    //TODO: select another currency instead of just BTC/bitcoin.
     func setSelectedCurrency(newCurrencyIndex: Int) {
         fetchCryptoExchangeRate(cryptoCurrencyPath: "BTC", exchangeCurrencyPath: currencyArray[newCurrencyIndex])
     }
@@ -32,24 +33,17 @@ struct CoinManager {
             let xHTTPAdditionalHeaders: [String : String] = ["X-CoinAPI-Key":apiKey]
             sessionConfig.httpAdditionalHeaders = xHTTPAdditionalHeaders
             let session = URLSession(configuration: sessionConfig)
-            
             let task = session.dataTask(with: url) { (data, response, error) in
-                
                 if error != nil {
                     print(error!)
                     return
                 }
-                
                 if let safeData = data {
-                    //TODO develop this more
                     if let coinExchangeModel = self.parseJSON(coinExchangeData: safeData) {
-                        print(coinExchangeModel)
                         self.delegate?.didUpdateCoinExchange(coinManager: self, coinExchangeModel: coinExchangeModel)
                     }
                 }
             }
-            
-            //4. Start the task
             task.resume()
         }
         
