@@ -7,6 +7,11 @@
 
 import Foundation
 
+protocol CoinManagerDelegate {
+    func didUpdateCoinExchange(coinManager: CoinManager, coinExchangeModel: CoinExchangeModel)
+    func didFailWithError(Error: Error)
+}
+
 struct CoinManager {
     
     let apiKey = Environment.ApiKey
@@ -14,7 +19,7 @@ struct CoinManager {
     
     let currencyArray = ["AUD", "BRL","CAD","CNY","EUR","GBP","HKD","IDR","ILS","INR","JPY","MXN","NOK","NZD","PLN","RON","RUB","SEK","SGD","USD","ZAR"]
     
-    var selectedCurrencyIndex = 0
+    var delegate: CoinManagerDelegate?
     
     func setSelectedCurrency(newCurrencyIndex: Int) {
         fetchCryptoExchangeRate(cryptoCurrencyPath: "BTC", exchangeCurrencyPath: currencyArray[newCurrencyIndex])
@@ -23,7 +28,10 @@ struct CoinManager {
     func fetchCryptoExchangeRate(cryptoCurrencyPath: String, exchangeCurrencyPath: String) {
         let urlString = baseURL + cryptoCurrencyPath + "/" + exchangeCurrencyPath
         if let url = URL(string: urlString) {
-            let session = URLSession(configuration: .default)
+            let sessionConfig = URLSessionConfiguration.default
+            let xHTTPAdditionalHeaders: [String : String] = ["X-CoinAPI-Key":apiKey]
+            sessionConfig.httpAdditionalHeaders = xHTTPAdditionalHeaders
+            let session = URLSession(configuration: sessionConfig)
             
             let task = session.dataTask(with: url) { (data, response, error) in
                 
@@ -34,7 +42,10 @@ struct CoinManager {
                 
                 if let safeData = data {
                     //TODO develop this more
-                    self.parseJSON(coinExchangeData: <#T##Data#>)
+                    if let coinExchangeModel = self.parseJSON(coinExchangeData: safeData) {
+                        print(coinExchangeModel)
+                        self.delegate?.didUpdateCoinExchange(coinManager: self, coinExchangeModel: coinExchangeModel)
+                    }
                 }
             }
             
@@ -45,13 +56,15 @@ struct CoinManager {
     }
     
     func parseJSON(coinExchangeData: Data) -> CoinExchangeModel? {
-//        let decoder = JSONDecoder()
+        let decoder = JSONDecoder()
         do {
-            //TODO decode json to proper model, not nil
-            return nil
-            
+            let decodedData = try decoder.decode(CoinExchangeData.self, from: coinExchangeData)
+            let cryptoCurrency = decodedData.asset_id_base
+            let exchangeCurrency = decodedData.asset_id_quote
+            let rate = decodedData.rate
+            return CoinExchangeModel(cryptoCurrency: cryptoCurrency, exchangeCurrency: exchangeCurrency, rate: rate)
         } catch {
-            //TODO error handling
+            delegate?.didFailWithError(Error: error)
             return nil
         }
     }
