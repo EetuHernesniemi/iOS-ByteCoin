@@ -7,3 +7,4 @@ To run the app and make it's networking features work, get an api_key from https
 1. Copy ConfigTemplate file 
 2. Rename the copy. 
 3. Set the API_KEY value in the template copy to one which you get from www.coinapi.io by email.
+4. Modify ByteCoin.xcodeproj file to use the configuration file copied at application launch.
