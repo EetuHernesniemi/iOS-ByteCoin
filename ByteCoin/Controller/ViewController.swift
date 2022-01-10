@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
+class ViewController: UIViewController {
     
     @IBOutlet weak var coinAmountLabel: UILabel!
     @IBOutlet weak var currencyLabel: UILabel!
@@ -22,6 +22,23 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         coinManager.delegate = self
     }
 
+    
+}
+
+extension ViewController: CoinManagerDelegate {
+    func didUpdateCoinExchange(coinManager: CoinManager, coinExchangeModel: CoinExchangeModel) {
+        DispatchQueue.main.async {
+            self.currencyLabel.text = coinExchangeModel.exchangeCurrency
+            self.coinAmountLabel.text = coinExchangeModel.getRoundedExchangeRate
+        }
+    }
+    
+    func didFailWithError(Error:Error) {
+        print(Error)
+    }
+}
+
+extension ViewController:  UIPickerViewDataSource, UIPickerViewDelegate {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -36,20 +53,6 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         coinManager.setSelectedCurrency(newCurrencyIndex: row)
-    }
-}
-
-extension ViewController: CoinManagerDelegate {
-    func didUpdateCoinExchange(coinManager: CoinManager, coinExchangeModel: CoinExchangeModel) {
-        DispatchQueue.main.async {
-            self.currencyLabel.text = coinExchangeModel.exchangeCurrency
-            self.coinAmountLabel.text = coinExchangeModel.getRoundedExchangeRate
-        }
-        
-    }
-    
-    func didFailWithError(Error:Error) {
-        print(Error)
     }
 }
 
