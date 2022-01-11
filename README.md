@@ -1,5 +1,5 @@
 # iOS-ByteCoin
-This is a crypto currency reporting application for iOS.
+This is a crypto currency exchange rate reporting application for iOS.
 
 To run the app and make it's networking features work, get an api_key from https://www.coinapi.io/
 
